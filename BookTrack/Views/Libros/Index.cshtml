@@ -1,0 +1,111 @@
+@model IEnumerable<BookTrack.Models.Libro>
+
+@{
+    ViewData["Title"] = "Catálogo de libros";
+    var totalLibros = Model.Count();
+    var totalEjemplares = Model.Sum(l => l.EjemplaresDisponibles);
+}
+
+<div class="bt-page">
+
+    <div class="bt-header">
+        <div>
+            <span class="bt-eyebrow">GESTIÓN DE BIBLIOTECA</span>
+            <h1>Catálogo de libros</h1>
+            <p>Administra, consulta y organiza los libros de tu biblioteca.</p>
+        </div>
+
+        <a asp-action="Create" class="bt-add-button">
+            <span class="bt-plus">+</span> Agregar libro
+        </a>
+    </div>
+
+    <div class="bt-stats">
+        <div class="bt-stat-card">
+            <div class="bt-stat-icon bt-icon-blue">📚</div>
+            <div>
+                <span class="bt-stat-label">Libros registrados</span>
+                <h2>@totalLibros</h2>
+            </div>
+        </div>
+
+        <div class="bt-stat-card">
+            <div class="bt-stat-icon bt-icon-green">📖</div>
+            <div>
+                <span class="bt-stat-label">Ejemplares disponibles</span>
+                <h2>@totalEjemplares</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="bt-table-card">
+        <div class="bt-table-heading">
+            <div>
+                <h3>Todos los libros</h3>
+                <p>Listado de libros registrados en BookTrack</p>
+            </div>
+            <span class="bt-count">@totalLibros registros</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table bt-table">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Género</th>
+                        <th>Año</th>
+                        <th>Ejemplares</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var libro in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="bt-book-title">
+                                        <div class="bt-book-icon">📕</div>
+                                        <strong>@libro.Titulo</strong>
+                                    </div>
+                                </td>
+                                <td>@libro.Autor</td>
+                                <td><span class="bt-genre">@libro.Genero</span></td>
+                                <td>@libro.AnioPublicacion</td>
+                                <td>
+                                    <span class="bt-quantity">@libro.EjemplaresDisponibles</span>
+                                </td>
+                                <td>
+                                    <div class="bt-actions">
+                                        <a asp-action="Details" asp-route-id="@libro.Id" class="bt-action bt-view" title="Ver detalles">Ver</a>
+                                        <a asp-action="Edit" asp-route-id="@libro.Id" class="bt-action bt-edit" title="Editar">Editar</a>
+                                        <a asp-action="Delete" asp-route-id="@libro.Id" class="bt-action bt-delete" title="Eliminar">Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <div class="bt-empty">
+                                    <div class="bt-empty-icon">📚</div>
+                                    <h4>Aún no hay libros registrados</h4>
+                                    <p>Agrega tu primer libro para comenzar a construir el catálogo.</p>
+                                    <a asp-action="Create" class="bt-add-button">Agregar primer libro</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="bt-footer-note">
+        <span>📘</span> BookTrack · Sistema de Gestión de Biblioteca
+    </div>
+</div>

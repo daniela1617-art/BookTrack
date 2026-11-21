@@ -1,0 +1,65 @@
+@model BookTrack.Models.Libro
+
+@{
+    ViewData["Title"] = "Eliminar libro";
+}
+
+<div class="bt-form-page">
+
+    <div class="bt-form-header">
+        <a asp-action="Index" class="bt-back-link">← Volver al catálogo</a>
+        <span class="bt-eyebrow">BOOKTRACK · BIBLIOTECA DIGITAL</span>
+        <h1>Eliminar libro</h1>
+        <p>Revisa la información antes de confirmar la eliminación.</p>
+    </div>
+
+    <div class="bt-form-card">
+
+        <div class="bt-form-card-title">
+            <div class="bt-form-icon">🗑️</div>
+            <div>
+                <h3>¿Deseas eliminar este libro?</h3>
+                <p>Esta acción eliminará el registro permanentemente.</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="alert alert-warning">
+            <strong>Atención:</strong> Una vez eliminado, el libro ya no aparecerá en el catálogo.
+        </div>
+
+        <dl class="row mt-4">
+            <dt class="col-sm-4">Título</dt>
+            <dd class="col-sm-8">@Model.Titulo</dd>
+
+            <dt class="col-sm-4">Autor</dt>
+            <dd class="col-sm-8">@Model.Autor</dd>
+
+            <dt class="col-sm-4">Género</dt>
+            <dd class="col-sm-8">@Model.Genero</dd>
+
+            <dt class="col-sm-4">Año de publicación</dt>
+            <dd class="col-sm-8">@Model.AnioPublicacion</dd>
+
+            <dt class="col-sm-4">Ejemplares disponibles</dt>
+            <dd class="col-sm-8">@Model.EjemplaresDisponibles</dd>
+        </dl>
+
+        <div class="bt-form-actions">
+
+            <a asp-action="Index" class="bt-cancel-button">
+                Cancelar
+            </a>
+
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <button type="submit" class="btn btn-danger">
+                    🗑️ Confirmar eliminación
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>

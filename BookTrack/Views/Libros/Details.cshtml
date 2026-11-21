@@ -1,0 +1,72 @@
+@model BookTrack.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalles del libro";
+}
+
+<div class="bt-form-page">
+
+    <div class="bt-form-header">
+        <a asp-action="Index" class="bt-back-link">← Volver al catálogo</a>
+
+        <span class="bt-eyebrow">BOOKTRACK · BIBLIOTECA DIGITAL</span>
+
+        <h1>Detalles del libro</h1>
+        <p>Consulta la información completa del libro registrado.</p>
+    </div>
+
+    <div class="bt-form-card">
+
+        <div class="bt-form-card-title">
+            <div class="bt-form-icon">📖</div>
+            <div>
+                <h3>@Model.Titulo</h3>
+                <p>Información del libro en el catálogo.</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="bt-detail-list">
+
+            <div class="bt-detail-item">
+                <span class="bt-detail-label">Título del libro</span>
+                <span class="bt-detail-value">@Model.Titulo</span>
+            </div>
+
+            <div class="bt-detail-item">
+                <span class="bt-detail-label">Autor</span>
+                <span class="bt-detail-value">@Model.Autor</span>
+            </div>
+
+            <div class="bt-detail-item">
+                <span class="bt-detail-label">Género literario</span>
+                <span class="bt-detail-value">@Model.Genero</span>
+            </div>
+
+            <div class="bt-detail-item">
+                <span class="bt-detail-label">Año de publicación</span>
+                <span class="bt-detail-value">@Model.AnioPublicacion</span>
+            </div>
+
+            <div class="bt-detail-item">
+                <span class="bt-detail-label">Ejemplares disponibles</span>
+                <span class="bt-detail-value bt-stock-value">
+                    📚 @Model.EjemplaresDisponibles ejemplares
+                </span>
+            </div>
+
+        </div>
+
+        <div class="bt-form-actions">
+            <a asp-action="Index" class="bt-cancel-button">Volver al catálogo</a>
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="bt-add-button">
+                ✏️ Editar libro
+            </a>
+        </div>
+
+    </div>
+</div>
